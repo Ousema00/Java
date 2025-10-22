@@ -19,6 +19,7 @@ public float getSwimmingSpeed() {
         this.swimmingSpeed = swimmingSpeed;
     }
 
+    @Override
     public void swim(){
         System.out.println("This Dolphin is swimming");
     }

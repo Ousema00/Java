@@ -2,6 +2,7 @@ package tn.esprit.gestionzoo.entities;
 
 public class Zoo {
     private Animal[] animals = new Animal[25];
+    private Aquatic[] aquaticAnimals = new Aquatic[10];
     private String name;
     private String city;
     private final int nbrCages = 25;
@@ -59,6 +60,7 @@ public class Zoo {
         return true;
     }
 
+
     public void displayAnimals() {
         System.out.println("Animaux du zoo " + name + " :");
         for (int i = 0; i < animalCount; i++) {
@@ -79,4 +81,57 @@ public class Zoo {
                 ", animalCount=" + animalCount +
                 '}';
     }
+
+    public void addAquaticAnimal(Aquatic aquatic) {
+        int i = 0;
+        while (i < aquaticAnimals.length) {
+            if (aquaticAnimals[i] == null) {
+                aquaticAnimals[i] = aquatic;
+                break;
+            } else {
+                i++;
+            }
+        }
+        if (i == aquaticAnimals.length) {
+            System.out.println("La aquatic animal est plein");
+
+        }
+    }
+
+    public void makeAquaticAnimalsSwim() {
+        System.out.println("=== Les animaux aquatiques nagent ===");
+        for (int i = 0; i < aquaticAnimals.length; i++) {
+            if (aquaticAnimals[i] != null) {
+                aquaticAnimals[i].swim(); // appel dynamique (polymorphisme)
+            }
+        }
+    }
+    public float maxPenguinSwimmingDepth(){
+        float maxPenguinSwimmingDepth = 0;
+        for(int i=0;i<aquaticAnimals.length;i++){
+            if( aquaticAnimals[i] instanceof Penguin && ((Penguin) aquaticAnimals[i]).getSwimmingDepth() > maxPenguinSwimmingDepth ){
+                maxPenguinSwimmingDepth=((Penguin) aquaticAnimals[i]).getSwimmingDepth();
+            }
+        }
+        return maxPenguinSwimmingDepth;
+
+    }
+
+    public void displayNumberOfAquaticsByType(){
+        int dph=0;
+        int pg=0;
+        for(int i=0;i< animals.length;i++){
+            if(animals[i].getClass()==Penguin.class ){
+                ++pg;
+            }
+            else if(animals[i].getClass()== Dolphin.class){
+                ++dph;
+            }
+        }
+        System.out.println("le nombre de penguin dans ce zoo est"+pg);
+        System.out.println("le nombre de dauphin dans ce zoo est "+dph);
+    }
+
 }
+
+
